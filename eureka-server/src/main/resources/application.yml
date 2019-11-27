@@ -1,0 +1,21 @@
+server:
+  port: 10086
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+  server:
+    eviction-interval-timer-in-ms: 60000  # 失效后  60秒才剔除  ；心跳比列  高于85% 也不会剔除（自我保护）
+spring:
+  application:
+    name: eureka
+management:
+  health:
+    mail:
+      enabled: false #关闭邮件健康检查
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:10087/eureka

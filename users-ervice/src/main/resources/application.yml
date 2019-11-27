@@ -1,0 +1,20 @@
+server:
+  port: 8081 #端口号
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/shuanshuang?characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: user-service #service 名字
+mybatis:
+  type-aliases-package: com.shanshuan.**.pojo
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka #eureka  注册地址
+#      defaultZone: http://localhost:10086/eureka,http://localhost:10087/eureka #eureka  注册地址
+  instance:
+    lease-renewal-interval-in-seconds: 30 #默认30秒向eureka  发送一次心跳包
+    lease-expiration-duration-in-seconds: 90 #如果隔了90秒 没接收到  就挂了

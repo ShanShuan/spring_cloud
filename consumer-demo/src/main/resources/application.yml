@@ -1,0 +1,39 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: consumer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka,http://localhost:10087/eureka #注册中心搞可用
+#user-service:
+#  ribbon:
+#    NFLoadBalancreRuleClassName: com.netflix.loadbalancer.RandomRule #user-service 服务 负载均衡  规则  随机
+
+#hystrix:
+#  command:
+#    default: #全局配置 超时 降级
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 3000
+hystrix:
+  command:
+    user-service: #单独服务配置 超时时间 降级
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+#feign
+ribbon:
+  ConnectTimeout: 5000
+  ReadTimeout: 5000
+feign:
+  hystrix:
+    enabled: true
+  comperssion:
+    request:
+      enabled: true #开启请求压缩
+    response:
+      enabled: true #开启响应压缩

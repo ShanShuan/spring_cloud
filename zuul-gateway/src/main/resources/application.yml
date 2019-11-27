@@ -1,0 +1,32 @@
+server:
+  port: 10087
+zuul:
+  routes:
+    user-service: #规则  随便取名  不重复就行
+      path: /user/**
+      serviceId: user-service
+#      stripPrefix: false #前缀是否加 匹配url  默认true
+  ignored-services: #忽略对外的配置
+    - consumer
+  prefix: /api
+#      url: http://localhost:8081
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+spring:
+  application:
+    name: zuul-gateway
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000
+ribbon:
+  ConnectTimeout: 400
+  ReadTimeout: 3000
+  MaxAutoRetriesNextServer: 0 #禁止重试  默认 1  abstractribboncommand  里面的  （ConnectTimeout+ReadTimeout）*(maxAutoRetries--当前服务重试 + 1) * (maxAutoRetriesNextServer--不同实例的重试 + 1) < 熔断时间
+
+
